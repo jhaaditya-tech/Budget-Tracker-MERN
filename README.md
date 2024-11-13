@@ -1,1 +1,1 @@
-# Budjet-Tracker-MERN
+# Budget-Tracker-MERN

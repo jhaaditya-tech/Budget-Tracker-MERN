@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+
+
 import './App.css';
 import { useState } from 'react';
 
@@ -7,10 +8,29 @@ function App() {
   const [name, setName] = useState('');
   const [datetime, setDatetime] = useState('');
   const [description, setDescription] = useState('')
+
+  function addNewTransactions(ev){
+    //Take all the state and send it to backend
+    //Backend will be on the directory called api
+    ev.preventDefault();
+    const url =process.env.REACT_APP_API_URL+'/transaction';
+    fetch(url,{
+      method: 'POST',
+      headers: {'Content-type':'application/json'},
+      body: JSON.stringify({name,description, datetime})
+    }).then(response => {
+      response.json().then(json=>{
+        console.log('result',json);
+      })
+    })
+  }
+
+
+
   return (
     <main>
-      <h1>$400<spaN>.00</spaN></h1>
-      <form>
+      <h1>$400<span>.00</span></h1>
+      <form onSubmit={addNewTransactions} >
         <div className='basic'>
           <input type = "text" 
                 value={name} 
